@@ -1,0 +1,22 @@
+.error-container {
+    display: flex;
+    width: 100vw;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error-container p {
+    font-size: 32px;
+    font-weight: 400;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.error-container h3 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+    margin-top: 18px;
+    color: #F13361;
+}

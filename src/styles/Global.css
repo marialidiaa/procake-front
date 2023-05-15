@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 14px Quicksand, sans-serif;
+    background: #F0F0F5;
+    -webkit-font-smoothing: antialiased;
+}
+
+input,
+button,
+textarea,
+select {
+    font: 400 18px Quicksand, sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #F13361;
+}
+
+form input {
+    width: 100%;
+    height: 60px;
+    color: #333333;
+    border: 1px solid #DCDCE6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-top: 16px;
+}
+
+form select {
+    width: 100%;
+    height: 60px;
+    color: #333333;
+    border: 1px solid #DCDCE6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-top: 16px;
+    background-color: #FFF;
+}
+
+form textarea {
+    width: 100%;
+    height: 12vh;
+    color: #333333;
+    border: 1px solid #DCDCE6;
+    border-radius: 8px;
+    padding: 14px 24px;
+    margin-top: 16px;
+    background-color: #FFF;
+    resize: none;
+}
+
+
+.button {
+    width: 100%;
+    height: 60px;
+    background: #F13361;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    font-weight: 700;
+    margin-top: 16px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 60px;
+    transition: filter 0.2s;
+}
+
+.button:hover {
+    filter: brightness(80%);
+}
+
+.textErro{
+    margin-top: 5px;
+    color: #ec003b;
+    font-size: 14px;
+}
+
+.btn-save {
+    background: #B2D4B2;
+    width: 40%;
+    height: 60px;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-left: 16px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 60px;
+    transition: filter 0.5s;
+    text-decoration: none;
+
+}
+
+.btn-cancel {
+    width: 40%;
+    height: 60px;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-left: 16px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 60px;
+    transition: filter 0.5s;
+    text-decoration: none;
+    background-color: #eb1c1c67;
+}
+
+
+.btn-cancel:hover {
+    filter: brightness(80%);
+}
+
+
+.btn-save:hover {
+    filter: brightness(80%);
+}
+
+.top {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.top h3 {
+    line-height: 70px;
+    margin-right: 60px;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.top button {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    background-color: transparent;
+}
+
+.top input {
+    width: 50%;
+    height: 40px;
+    color: #333333;
+    border: 1px solid #DCDCE6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-top: 16px;
+}
+
+.top input.small {
+    width: 15%;
+}
+
+.top div.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 30px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.top div.btn:hover {
+    filter: brightness(60%);
+}
+
+.table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.table th {
+    width: 200px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    border-bottom: 1px solid #333333;
+    padding: 10px;
+}
+
+.table th.acoes {
+    width: 80px;
+}
+
+.table td {
+    text-align: center;
+    padding: 10px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #fddde2;
+}
+
+.table .icon {
+    margin-left: 10px;
+    cursor: pointer;
+    transition: filter 0.5s;
+}
+
+.table .icon:hover {
+    filter: brightness(40%);
+}
+
+.table-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.table-small th {
+    width: 230px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    border-bottom: 1px solid #333333;
+    padding: 10px;
+}
+
+.table-small th.acoes {
+    width: 100px;
+}
+
+.table-small td {
+    text-align: center;
+    padding: 10px;
+}
+
+.table-small tr:nth-child(even) {
+    background-color: #fddde2;
+}
+
+.table-small .icon {
+    margin-left: 10px;
+    cursor: pointer;
+    transition: filter 0.5s;
+}
+
+.table-small .icon:hover {
+    filter: brightness(40%);
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form h1 {
+    margin: 70px auto 70px 70px;
+    font-size: 60px;
+    font-weight: 400;
+}
+
+.form form {
+    display: flex;
+    max-width: 1600px;
+    flex-wrap: wrap;
+}
+
+.form form div.input {
+    width: 600px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+
+.form form div.input label {
+    font-size: 18px;
+}
+
+.form form div.text-area {
+    width: 68vw;
+    margin-left: 100px;
+}
+
+.form form div.text-area input {
+    margin: 10px 0 20px 0;
+}
+
+.form form div.text-area label {
+    font-size: 18px;
+}
+
+.detalhes {
+    display: flex;
+    flex-direction: column;
+}
+
+.detalhes h1 {
+    margin: 70px auto 70px 70px;
+    font-size: 60px;
+    font-weight: 400;
+}
+
+.detalhes section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1300px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.detalhes section div {
+    display: flex;
+    align-content: center;
+    width: 600px;
+    margin-bottom: 40px;
+}
+
+.detalhes section div h2 {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.detalhes section div p {
+    line-height: 30px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.detalhes div.titulo-detalhes {
+    display: flex;
+    justify-content: space-around;
+}
+
+.detalhes div.titulo-detalhes div.input {
+    width: 600px;
+    margin-top: 40px;
+}
