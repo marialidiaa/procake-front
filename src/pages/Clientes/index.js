@@ -119,7 +119,7 @@ const Clientes = () => {
                     Authorization: `Bearer ${tokenAcesso}`
                 }
             })
-            setClientes (clientes.map(function (item) { return item.id === id ? response.data : item }))
+            setClientes(clientes.map(function (item) { return item.id === id ? response.data : item }))
         } catch (error) {
             console.log(error)
         }

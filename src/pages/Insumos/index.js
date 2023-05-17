@@ -16,6 +16,7 @@ const Insumos = () => {
 
     const [insumos, setInsumos] = useState([])
     const [pesquisa, setPesquisa] = useState()
+    const [quantidade, setQuantidade] = useState()
     const tokenAcesso = localStorage.getItem('tokenAcesso')
 
     const { signout } = useAuth();
@@ -23,7 +24,7 @@ const Insumos = () => {
 
 
     useEffect(() => {
-        api.get('insumos', {
+        api.get('insumos/ativos', {
             headers: {
                 Authorization: `Bearer ${tokenAcesso}`
             },
@@ -37,9 +38,16 @@ const Insumos = () => {
             res.data.content.forEach(i => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
             })
-
+            res.data.content.forEach( async i =>{
+                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${tokenAcesso}`
+                    }})
+                let quantidade = 0
+                estoque.data.forEach(e => quantidade += e.quantidade);
+                setQuantidade(quantidade)
+            })
             setInsumos(res.data.content)
-
         }).catch((err) => {
             console.log(err)
             if (err.response.data === "") {
@@ -58,12 +66,18 @@ const Insumos = () => {
                     }
                 }).then((res) => {
 
-                    if (res.data.length > 0) {
-                        res.data.forEach(i => {
-                            i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
-                        })
-                    }
-
+                    res.data.forEach(i => {
+                        i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
+                    })
+                    res.data.forEach( async i =>{
+                        let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
+                            headers: {
+                                Authorization: `Bearer ${tokenAcesso}`
+                            }})
+                        let quantidade = 0
+                        estoque.data.forEach(e => quantidade += e.quantidade);
+                        setQuantidade(quantidade)
+                    })
                     setInsumos(res.data)
                     setPesquisa("")
                 }).catch((err) => {
@@ -93,6 +107,16 @@ const Insumos = () => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
             })
 
+            res.data.content.forEach( async i =>{
+                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${tokenAcesso}`
+                    }})
+                let quantidade = 0
+                estoque.data.forEach(e => quantidade += e.quantidade);
+                setQuantidade(quantidade)
+            })
+
             setInsumos(res.data.content)
         } catch (error) {
             console.log(error)
@@ -115,6 +139,16 @@ const Insumos = () => {
 
             res.data.content.forEach(i => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
+            })
+
+            res.data.content.forEach( async i =>{
+                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${tokenAcesso}`
+                    }})
+                let quantidade = 0
+                estoque.data.forEach(e => quantidade += e.quantidade);
+                setQuantidade(quantidade)
             })
 
             setInsumos(res.data.content)
@@ -215,6 +249,7 @@ const Insumos = () => {
                         <tr>
                             <th className='acoes'>Código</th>
                             <th>Nome</th>
+                            <th className='acoes'>Quantidade</th>
                             <th>Unidade de medida</th>
                             <th>Descrição</th>
                             <th>Status</th>
@@ -226,6 +261,7 @@ const Insumos = () => {
                             <tr key={insumos.id}>
                                 <td>{insumos.codigo}</td>
                                 <td>{insumos.nome}</td>
+                                <td>{quantidade}</td>
                                 <td>
                                     {insumos.unidadeMedida}
                                 </td>

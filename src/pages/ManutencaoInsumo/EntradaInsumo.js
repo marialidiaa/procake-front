@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
-import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate } from 'react-router-dom'
 
 
@@ -10,7 +9,7 @@ import UTILS from '../../utils/UTILS'
 import './styles.css'
 import '../../styles/Global.css'
 
-const NovoEstoque = () => {
+const EntradaInsumo = () => {
 
     const [insumo, setInsumo] = useState("")
     const [listaInsumo, setListaInsumo] = useState([])
@@ -22,7 +21,6 @@ const NovoEstoque = () => {
     const [notaFiscal, setNotaFiscal] = useState('')
     const tokenAcesso = localStorage.getItem('tokenAcesso')
 
-    const { signout } = useAuth();
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -46,7 +44,7 @@ const NovoEstoque = () => {
                     console.log(err.response.data)
                 })
             }
-        }, 500)
+        }, 2000)
 
         return () => clearTimeout(timer)
     }, [pesquisa, tokenAcesso])
@@ -82,7 +80,7 @@ const NovoEstoque = () => {
                     Authorization: `Bearer ${tokenAcesso}`
                 }
             })
-            navigate("/estoque")
+            navigate("/insumos/manutencao")
         } catch (error) {
             let errorMessage = "";
             error.response.data.errors.forEach(element => {
@@ -96,7 +94,7 @@ const NovoEstoque = () => {
         <>
             <Navbar />
             <section className='form'>
-                <h1>Inserir estoque</h1>
+                <h1>Inserir insumo</h1>
                 <form>
 
                     <div className='input'>
@@ -173,7 +171,7 @@ const NovoEstoque = () => {
                             Salvar
                         </button>
 
-                        <Link to="/estoque" className=' btn-cancel' >
+                        <Link to="/insumos/manutencao" className=' btn-cancel' >
                             Voltar
                         </Link>
                     </div>
@@ -183,4 +181,4 @@ const NovoEstoque = () => {
     )
 }
 
-export default NovoEstoque
+export default EntradaInsumo

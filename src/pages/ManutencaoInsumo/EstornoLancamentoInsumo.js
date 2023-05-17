@@ -8,7 +8,7 @@ import api from '../../api/api'
 import './styles.css'
 import '../../styles/Global.css'
 
-const EstornoLancamentoEstoque = () => {
+const EstornoLancamentoInsumo = () => {
 
     const [estoque, setEstoque] = useState([])
     const [dataInicial, setDataInicial] = useState("")
@@ -81,8 +81,8 @@ const EstornoLancamentoEstoque = () => {
                     Authorization: `Bearer ${tokenAcesso}`
                 }
             })
-
-            estoque = estoque.filter(item => item.id === id);
+            
+            setEstoque(estoque.filter(item => item.id !== id));
             return
         } catch (error) {
             alert(error.response.data.message)
@@ -189,4 +189,4 @@ const EstornoLancamentoEstoque = () => {
     )
 }
 
-export default EstornoLancamentoEstoque
+export default EstornoLancamentoInsumo

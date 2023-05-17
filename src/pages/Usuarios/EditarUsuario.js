@@ -89,7 +89,7 @@ const EditarUsuario = () => {
         <>
             <Navbar />
             <section className='form'>
-                <h1>Editar usuario</h1>
+                <h1>Editar Funcionário</h1>
                 <form>
                     <div className='input'>
                         <label>Nome</label>

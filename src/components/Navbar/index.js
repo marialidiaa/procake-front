@@ -14,8 +14,8 @@ const Navbar = () => {
         navigate("/login")
     }
 
-    const estoque = () => {
-        navigate("/estoque/manutencao")
+    const insumo = () => {
+        navigate("/insumos/manutencao")
     }
 
     const usuarios = () => {
@@ -102,7 +102,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
-                            <li onClick={estoque}>
+                            <li onClick={insumo}>
                                 <Link className='drop-down-link'>
                                     Manutenção de insumos
                                 </Link>

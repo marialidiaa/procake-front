@@ -15,15 +15,13 @@ import NovoInsumo from "../pages/Insumos/NovoInsumo";
 import EditarInsumo from "../pages/Insumos/EditarInsumo";
 
 import Estoque from '../pages/Estoque'
-import NovoEstoque from '../pages/Estoque/NovoEstoque'
-import DetalheEstoque from '../pages/Estoque/DetalheEstoque'
 
-
-import ManutencaoEstoque from '../pages/ManutencaoEstoque'
-import EstornoLancamentoEstoque from '../pages/ManutencaoEstoque/EstornoLancamentoEstoque'
-import EstornoBaixaEstoque from '../pages/ManutencaoEstoque/EstornoBaixaEstoque'
-import ReintegracaoEstoque from '../pages/ManutencaoEstoque/ReintegracaoEstoque'
-import BaixaEstoque from '../pages/ManutencaoEstoque/BaixaEstoque'
+import ManutencaoInsumo from '../pages/ManutencaoInsumo'
+import ManutencaoInsumoNovoEntradaInsumo from '../pages/ManutencaoInsumo/EntradaInsumo'
+import ManutencaoInsumoEstornoLancamentoInsumo from '../pages/ManutencaoInsumo/EstornoLancamentoInsumo'
+import ManutencaoInsumoEstornoBaixaInsumo from '../pages/ManutencaoInsumo/EstornoBaixaInsumo'
+import ManutencaoInsumoReintegracaoInsumo from '../pages/ManutencaoInsumo/ReintegracaoInsumo'
+import ManutencaoInsumoBaixaInsumo from '../pages/ManutencaoInsumo/BaixaInsumo'
 
 import Marcas from "../pages/Marcas";
 import NovaMarca from "../pages/Marcas/NovaMarca";
@@ -64,14 +62,14 @@ const RoutesApp = () => {
                     <Route path="/insumos/editar/:id" element={<Private Item={EditarInsumo} />} />
 
                     <Route path="/estoque" element={<Private Item={Estoque} />} />
-                    <Route path="/estoque/novo" element={<Private Item={NovoEstoque} />} />
-                    <Route path="/estoque/detalhes/:id" element={<Private Item={DetalheEstoque} />} />
+                    {/* <Route path="/estoque/detalhes/:id" element={<Private Item={DetalheEstoque} />} /> */}
 
-                    <Route path="/estoque/manutencao" element={<Private Item={ManutencaoEstoque} />} />
-                    <Route path="/estoque/manutencao/estorno-lancamento" element={<Private Item={EstornoLancamentoEstoque} />} />
-                    {/* <Route path="/estoque/manutencao/baixa" element={<Private Item={BaixaEstoque} />} />
-                    <Route path="/estoque/manutencao/reintegracao" element={<Private Item={ReintegracaoEstoque} />} />
-                    <Route path="/estoque/manutencao/estorno-baixa" element={<Private Item={EstornoBaixaEstoque} />} /> */}
+                    <Route path="/insumos/manutencao" element={<Private Item={ManutencaoInsumo} />} />
+                    <Route path="/insumos/manutencao/estorno-lancamento" element={<Private Item={ManutencaoInsumoEstornoLancamentoInsumo} />} />
+                    <Route path="/insumos/manutencao/novo" element={<Private Item={ManutencaoInsumoNovoEntradaInsumo} />} />
+                    {/* <Route path="/insumo/manutencao/baixa" element={<Private Item={BaixaEstoque} />} />
+                    <Route path="/insumo/manutencao/reintegracao" element={<Private Item={ReintegracaoInsumo} />} />
+                    <Route path="/insumo/manutencao/estorno-baixa" element={<Private Item={EstornoBaixaInsumo} />} /> */}
 
                     <Route path="/marcas" element={<Private Item={Marcas} />} />
                     <Route path="/marcas/novas" element={<Private Item={NovaMarca} />} />
