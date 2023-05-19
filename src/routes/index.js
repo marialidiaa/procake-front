@@ -14,14 +14,14 @@ import Insumos from "../pages/Insumos";
 import NovoInsumo from "../pages/Insumos/NovoInsumo";
 import EditarInsumo from "../pages/Insumos/EditarInsumo";
 
-import Estoque from '../pages/Estoque'
-
 import ManutencaoInsumo from '../pages/ManutencaoInsumo'
 import ManutencaoInsumoNovoEntradaInsumo from '../pages/ManutencaoInsumo/EntradaInsumo'
 import ManutencaoInsumoEstornoLancamentoInsumo from '../pages/ManutencaoInsumo/EstornoLancamentoInsumo'
 import ManutencaoInsumoEstornoBaixaInsumo from '../pages/ManutencaoInsumo/EstornoBaixaInsumo'
 import ManutencaoInsumoReintegracaoInsumo from '../pages/ManutencaoInsumo/ReintegracaoInsumo'
 import ManutencaoInsumoBaixaInsumo from '../pages/ManutencaoInsumo/BaixaInsumo'
+import Lancamentos from "../pages/ManutencaoInsumo/Lancamentos";
+import DetalheLancamentoInsumo from "../pages/ManutencaoInsumo/DetalheLancamentoInsumo";
 
 import Marcas from "../pages/Marcas";
 import NovaMarca from "../pages/Marcas/NovaMarca";
@@ -34,6 +34,7 @@ import EditarFornecedor from "../pages/Fornecedores/EditarFornecedor";
 import Clientes from "../pages/Clientes";
 import NovoCliente from "../pages/Clientes/NovoCliente";
 import EditarCliente from "../pages/Clientes/EditarCliente";
+
 
 const Private = ({ Item }) => {
     const { signed } = useAuth();
@@ -61,15 +62,14 @@ const RoutesApp = () => {
                     <Route path="/insumos/novo" element={<Private Item={NovoInsumo} />} />
                     <Route path="/insumos/editar/:id" element={<Private Item={EditarInsumo} />} />
 
-                    <Route path="/estoque" element={<Private Item={Estoque} />} />
-                    {/* <Route path="/estoque/detalhes/:id" element={<Private Item={DetalheEstoque} />} /> */}
-
                     <Route path="/insumos/manutencao" element={<Private Item={ManutencaoInsumo} />} />
                     <Route path="/insumos/manutencao/estorno-lancamento" element={<Private Item={ManutencaoInsumoEstornoLancamentoInsumo} />} />
                     <Route path="/insumos/manutencao/novo" element={<Private Item={ManutencaoInsumoNovoEntradaInsumo} />} />
                     {/* <Route path="/insumo/manutencao/baixa" element={<Private Item={BaixaEstoque} />} />
                     <Route path="/insumo/manutencao/reintegracao" element={<Private Item={ReintegracaoInsumo} />} />
                     <Route path="/insumo/manutencao/estorno-baixa" element={<Private Item={EstornoBaixaInsumo} />} /> */}
+                     <Route path="/insumos/lancamentos/:id" element={<Private Item={Lancamentos} />} />
+                     <Route path="/insumos/lancamentos/detalhes/:id" element={<Private Item={DetalheLancamentoInsumo} />} />
 
                     <Route path="/marcas" element={<Private Item={Marcas} />} />
                     <Route path="/marcas/novas" element={<Private Item={NovaMarca} />} />

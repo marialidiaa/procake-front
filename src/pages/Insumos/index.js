@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useAuth from "../../hooks/useAuth";
 import Navbar from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
-import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3 } from 'react-icons/fi'
+import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3, FiList } from 'react-icons/fi'
 
 import api from '../../api/api'
 import UTILS from '../../utils/UTILS'
@@ -16,7 +16,6 @@ const Insumos = () => {
 
     const [insumos, setInsumos] = useState([])
     const [pesquisa, setPesquisa] = useState()
-    const [quantidade, setQuantidade] = useState()
     const tokenAcesso = localStorage.getItem('tokenAcesso')
 
     const { signout } = useAuth();
@@ -38,15 +37,7 @@ const Insumos = () => {
             res.data.content.forEach(i => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
             })
-            res.data.content.forEach( async i =>{
-                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${tokenAcesso}`
-                    }})
-                let quantidade = 0
-                estoque.data.forEach(e => quantidade += e.quantidade);
-                setQuantidade(quantidade)
-            })
+            
             setInsumos(res.data.content)
         }).catch((err) => {
             console.log(err)
@@ -68,15 +59,6 @@ const Insumos = () => {
 
                     res.data.forEach(i => {
                         i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
-                    })
-                    res.data.forEach( async i =>{
-                        let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
-                            headers: {
-                                Authorization: `Bearer ${tokenAcesso}`
-                            }})
-                        let quantidade = 0
-                        estoque.data.forEach(e => quantidade += e.quantidade);
-                        setQuantidade(quantidade)
                     })
                     setInsumos(res.data)
                     setPesquisa("")
@@ -107,16 +89,6 @@ const Insumos = () => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
             })
 
-            res.data.content.forEach( async i =>{
-                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${tokenAcesso}`
-                    }})
-                let quantidade = 0
-                estoque.data.forEach(e => quantidade += e.quantidade);
-                setQuantidade(quantidade)
-            })
-
             setInsumos(res.data.content)
         } catch (error) {
             console.log(error)
@@ -140,17 +112,6 @@ const Insumos = () => {
             res.data.content.forEach(i => {
                 i.unidadeMedida = UTILS.CONVERT_UNIDADE_MEDIDA_TEXTO(i.unidadeMedida)
             })
-
-            res.data.content.forEach( async i =>{
-                let estoque = await api.get(`estoque/listar-insumo-id/${i.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${tokenAcesso}`
-                    }})
-                let quantidade = 0
-                estoque.data.forEach(e => quantidade += e.quantidade);
-                setQuantidade(quantidade)
-            })
-
             setInsumos(res.data.content)
         } catch (error) {
 
@@ -163,6 +124,10 @@ const Insumos = () => {
 
     async function editar(id) {
         navigate(`/insumos/editar/${id}`)
+    }
+
+    async function lancamentos(id) {
+        navigate(`/insumos/lancamentos/${id}`)
     }
 
     async function desativar(id) {
@@ -252,7 +217,8 @@ const Insumos = () => {
                             <th className='acoes'>Quantidade</th>
                             <th>Unidade de medida</th>
                             <th>Descrição</th>
-                            <th>Status</th>
+                            <th className='acoes'>Status</th>
+                            <th className='acoes'>Lançamentos</th>
                             <th className='acoes'>Ações</th>
                         </tr>
                     </thead>
@@ -261,12 +227,18 @@ const Insumos = () => {
                             <tr key={insumos.id}>
                                 <td>{insumos.codigo}</td>
                                 <td>{insumos.nome}</td>
-                                <td>{quantidade}</td>
-                                <td>
-                                    {insumos.unidadeMedida}
-                                </td>
+                                <td>{insumos.quantidade ? insumos.quantidade : "0"}</td>
+                                <td>{insumos.unidadeMedida}</td>
                                 <td>{insumos.descricao}</td>
                                 <td>{insumos.enabled ? "ATIVO" : "DESATIVADO"}</td>
+                                <td><FiList
+                                 color='#6098DE'
+                                 className='icon'
+                                 size={25}
+                                 type='button'
+                                 title="Lançamentos"
+                                 onClick={() => lancamentos(insumos.id)}
+                                /></td>
                                 <td>
                                     <FiEdit3
                                         color='#6098DE'

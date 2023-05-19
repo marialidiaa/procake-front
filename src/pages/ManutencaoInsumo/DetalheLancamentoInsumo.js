@@ -7,7 +7,7 @@ import api from '../../api/api'
 import './styles.css'
 
 
-const DetalheEstoque = () => {
+const DetalheLancamentoInsumo = () => {
 
     const [insumo, setInsumo] = useState("")
     const [quantidade, setQuantidade] = useState("")
@@ -50,9 +50,9 @@ const DetalheEstoque = () => {
             <Navbar />
             <section className='detalhes'>
                 <div className='titulo-detalhes'>
-                    <h1>Detalhes de estoque</h1>
+                    <h1>Detalhes de lançamento</h1>
                     <div className='input'>
-                        <Link to="/estoque" className=' btn-cancel' >
+                        <Link to="/insumos" className=' btn-cancel' >
                             Voltar
                         </Link>
                     </div>
@@ -101,4 +101,4 @@ const DetalheEstoque = () => {
     )
 }
 
-export default DetalheEstoque
+export default DetalheLancamentoInsumo

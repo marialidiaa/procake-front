@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
-import useAuth from "../../hooks/useAuth";
+import React from 'react'
 import Navbar from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { FiFilePlus, FiFileMinus, FiXSquare, FiRotateCcw, FiGrid} from 'react-icons/fi'
-
-
-import api from '../../api/api'
-import UTILS from '../../utils/UTILS'
 
 import './styles.css'
 import '../../styles/Global.css'
@@ -40,7 +35,7 @@ const ManutencaoInsumo = () => {
             <section className='menu-manutencao-estoque'>
 
             <div className='btn' onClick={lancamentoInsumo}>
-                    <div><FiFilePlus color='#ff0095' size={40}/></div>
+                    <div><FiFilePlus size={40}/></div>
                     <p>Entrada de insumos</p>
                 </div>
 

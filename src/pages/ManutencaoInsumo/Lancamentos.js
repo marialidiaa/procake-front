@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from "../../hooks/useAuth";
 import Navbar from '../../components/Navbar'
-import { useNavigate } from 'react-router-dom'
-import { FiPlusCircle, FiFileText } from 'react-icons/fi'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { FiFileText } from 'react-icons/fi'
 import api from '../../api/api'
 
 import './styles.css'
@@ -10,17 +10,34 @@ import '../../styles/Global.css'
 
 
 
-const Estoque = () => {
+const Lancamentos = () => {
 
-    const [estoque, setEstoque] = useState([])
-    const [pesquisa, setPesquisa] = useState()
+    const [lancamento, setLancamento] = useState([])
+    const [insumo, setInsumo] = useState("")
     const tokenAcesso = localStorage.getItem('tokenAcesso')
 
     const { signout } = useAuth();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { id } = useParams();
+
 
     useEffect(() => {
-        api.get('estoque', {
+        api.get(`/insumos/${id}`, {
+            headers: {
+                Authorization: `Bearer ${tokenAcesso}`
+            }
+        }).then((res) => {
+
+            setInsumo(res.data)
+        }).catch((err) => {
+            if (err.response.data === "") {
+                signout();
+            } else {
+                alert(err.response.data)
+            }
+        })
+
+        api.get(`/estoque/listar-insumo-id/${id}`, {
             headers: {
                 Authorization: `Bearer ${tokenAcesso}`
             },
@@ -30,74 +47,40 @@ const Estoque = () => {
                 page: 0
             }
         }).then((res) => {
-            res.data.content.forEach(e => {
+            res.data.forEach(e => {
                 let data = new Date(e.dataInsercao);
                 let dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
                 e.dataInsercao = dataFormatada;
-
                 data = new Date(e.dataVencimento);
                 dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
                 e.dataVencimento = dataFormatada;
 
                 e.valor = e.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             })
-            setEstoque(res.data.content)
+            setLancamento(res.data)
         }).catch((err) => {
-            console.log(err)
             if (err.response.data === "") {
                 signout();
             } else {
                 alert(err.response.data)
             }
         })
-    }, [tokenAcesso, signout])
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
+        
+    }, [tokenAcesso, signout, id])
 
-            if (pesquisa !== "" && pesquisa !== undefined) {
-                api.get(`estoque/pesquisar/${pesquisa}`, {
-                    headers: {
-                        Authorization: `Bearer ${tokenAcesso}`
-                    }
-                }).then((res) => {
-                    setEstoque(res.data)
-                    setPesquisa("")
-                }).catch((err) => {
-                    console.log(err)
-                })
-            }
-        }, 500)
-        return () => clearTimeout(timer)
-    }, [pesquisa, tokenAcesso])
-
-
-    async function novoEstoque() {
-        navigate("/estoque/novo")
-    }
-
-    async function detalheEstoque(id) {
-        navigate(`/estoque/detalhes/${id}`)
+    async function DetalheLancamentoInsumo(id) {
+        navigate(`/insumos/lancamentos/detalhes/${id}`)
     }
 
     return (
         <>
             <Navbar />
             <section className='top'>
-                <h3>Estoque</h3>
-                <input
-                    placeholder='Pesquisar por nome de insumo'
-                    value={pesquisa}
-                    onChange={e => setPesquisa(e.target.value)}
-                />
-
-                <div className='btn'
-                    onClick={novoEstoque} >
-                    <button type='button'>
-                        <FiPlusCircle size={25} color='#6098DE' />
-                    </button>
-                    <p>Adicionar</p>
-                </div>
+                <h3>LANÇAMENTOS DO INSUMO {insumo.nome}</h3>   
+                <Link to="/insumos" className=' btn-cancel-small' >
+                            Voltar
+                        </Link>    
             </section>
 
             <section className='table-small'>
@@ -114,12 +97,12 @@ const Estoque = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {estoque.map(estoque => (
+                        {lancamento.map(estoque => (
                             <tr key={estoque.id}>
-                                <td>COD: {estoque.insumo.codigo} - {estoque.insumo.nome}</td>
+                                <td>COD: {insumo.codigo} - {insumo.nome}</td>
                                 <td>{estoque.marca}</td>
                                 <td>
-                                    {estoque.quantidade}{estoque.insumo.unidadeMedida}
+                                    {estoque.quantidade}{insumo.unidadeMedida}
                                 </td>
                                 <td>{estoque.dataVencimento}</td>
                                 <td>{estoque.valor}</td>
@@ -131,7 +114,7 @@ const Estoque = () => {
                                         size={20}
                                         type='button'
                                         title="Detalhes"
-                                        onClick={() => detalheEstoque(estoque.id)}
+                                        onClick={() => DetalheLancamentoInsumo(estoque.id)}
                                     />
                                 </td>
                             </tr>
@@ -144,4 +127,4 @@ const Estoque = () => {
     )
 }
 
-export default Estoque
+export default Lancamentos
