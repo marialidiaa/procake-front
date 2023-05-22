@@ -14,18 +14,62 @@ const NovoFornecedor = () => {
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [cpfCnpj, setCpfCnpj] = useState("")
+    const [telefone, setTelefone] = useState("")
+    const [rua, setRua] = useState("")
+    const [numero, setNumero] = useState("")
+    const [cidade, setCidade] = useState("")
+    const [estado, setEstado] = useState("")
+    const [bairro, setBairro] = useState("")
+    const [cep, setCep]= useState("")
+    const [complemento, setComplemento] = useState("")
+
+    const [erroNome, setErroNome] = useState("")
+    const [erroEmail, setErroEmail] = useState("")
+    const [erroTelefone, setErroTelefone] = useState("")
+    const [erroCidade, setErroCidade] = useState("")
+    const [erroEstado, setErroEstado] = useState("")
+    const [errocpfCnpj, setErrocpfCnpj] = useState("")
+    const [erroRua, setErroRua] = useState("")
+    const [erroBairro, setErroBairro] = useState("")
+    const [erroCep, setErroCep] = useState("")
 
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
 
-    async function salvar(e) {
+    useEffect(() => {
+        setErroNome("")
+        setEmail("")
+        setErroTelefone("")
+        setCidade("")
+        setEstado("")
+        setCpfCnpj("")
+        setBairro("")
+        setCep("")
+        setRua("")
 
+     }, [])
+
+     async function salvar(e) {
         e.preventDefault()
 
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
+
         const data = {
-                nome,
-                email,
-                cpfCnpj
+            nome,
+            email,
+            telefone,
+            rua,
+            numero,
+            cidade,
+            estado,
+            bairro,
+            cep,
+            complemento,
+            cpfCnpj,
+            "enabled" : true 
         }
         try {
             await api.post('fornecedores', data, {
@@ -43,6 +87,46 @@ const NovoFornecedor = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(email.trim().length <= 0 || email.trim === "" || email == null){
+            setErroEmail("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cidade.trim().length <= 0 || cidade.trim === "" || cidade == null){
+            setErroCidade("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(estado.trim().length <= 0 || estado.trim === "" || estado == null){
+        setErroEstado("*Não pode ser vazio*")
+        controle = 1;            
+        }        
+        if(telefone.trim().length <= 0 || telefone.trim === "" || telefone == null){
+            setErroTelefone("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cpfCnpj.trim().length <= 0 || cpfCnpj.trim === "" || cpfCnpj == null){
+            setErrocpfCnpj("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(rua.trim().length <= 0 || rua.trim === "" || rua == null){
+            setErroRua("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(bairro.trim().length <= 0 || bairro.trim === "" || bairro == null){
+            setErroBairro("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cep.trim().length <= 0 || cep.trim === "" || cep == null){
+            setErroCep("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
 
     return (
         <>
@@ -57,6 +141,7 @@ const NovoFornecedor = () => {
                             placeholder='Nome'
                             onChange={(e) => setNome(e.target.value)}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>
@@ -66,6 +151,7 @@ const NovoFornecedor = () => {
                             placeholder='Email'
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        <p className='textErro'>{erroEmail}</p>
                     </div>
 
                     <div className='input'>
@@ -75,7 +161,87 @@ const NovoFornecedor = () => {
                             placeholder='CPF/CNPJ'
                             onChange={(e) => setCpfCnpj(e.target.value)}
                         />
+                        <p className='textErro'>{errocpfCnpj}</p>
                     </div>
+
+                    <div className='input'>
+                        <label>Telefone</label>
+                        <input
+                            type='text'
+                            placeholder='Telefone'
+                            onChange={(e) => setTelefone(e.target.value)}
+                        />
+                        <p className='textErro'>{erroTelefone}</p>
+                    </div>
+
+                    <div className='input'>
+                        <label>Rua</label>
+                        <input
+                            type='text'
+                            placeholder='Rua'
+                            onChange={(e) => setRua (e.target.value)}
+                        />
+                        <p className='textErro'>{erroRua}</p>
+                    </div>
+
+                    <div className='input'>
+                        <label>Número</label>
+                        <input
+                            type='text'
+                            placeholder='Número'
+                            onChange={(e) => setNumero (e.target.value)}
+                        />
+                        
+                    </div> 
+
+                    <div className='input'>
+                        <label>Bairro</label>
+                        <input
+                            type='text'
+                            placeholder='Bairro'
+                            onChange={(e) => setBairro (e.target.value)}
+                        />
+                        <p className='textErro'>{erroTelefone}</p>
+                    </div> 
+
+                    <div className='input'>
+                        <label>CEP</label>
+                        <input
+                            type='text'
+                            placeholder='CEP'
+                            onChange={(e) => setCep (e.target.value)}
+                        />
+                        <p className='textErro'>{erroCep}</p>
+                    </div>  
+
+                    <div className='input'>
+                        <label>Complemento</label>
+                        <input
+                            type='text'
+                            placeholder='Complemento'
+                            onChange={(e) => setComplemento (e.target.value)}
+                        />
+                    </div> 
+
+                    <div className='input'>
+                        <label>Cidade</label>
+                        <input
+                            type='text'
+                            placeholder='Cidade'
+                            onChange={(e) => setCidade (e.target.value)}
+                        />
+                        <p className='textErro'>{erroCidade}</p>
+                    </div> 
+
+                    <div className='input'>
+                        <label>Estado</label>
+                        <input
+                            type='text'
+                            placeholder='Estado'
+                            onChange={(e) => setEstado (e.target.value)}
+                        />
+                        <p className='textErro'>{erroEstado}</p>
+                    </div> 
 
                     <div className='input'>
                         <button className='btn-save' onClick={e => salvar(e)}>

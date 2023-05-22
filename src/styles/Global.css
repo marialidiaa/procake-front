@@ -225,6 +225,7 @@ form textarea {
 
 .table th.acoes {
     width: 80px;
+    text-align: center;
 }
 
 .table td {

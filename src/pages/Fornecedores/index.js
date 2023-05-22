@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import useAuth from "../../hooks/useAuth";
 import Navbar from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
-import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3 } from 'react-icons/fi'
+import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3, FiFileText } from 'react-icons/fi'
 
 import api from '../../api/api'
 
 import './styles.css'
 import '../../styles/Global.css'
+import DetalheFornecedor from './DetalheFornecedores';
 
 
 const Fornecedor = () => {
@@ -142,6 +143,10 @@ const Fornecedor = () => {
         }
     }
 
+    async function DetalheFornecedor(id) {
+        navigate(`/fornecedores/detalhe/${id}`)
+    }
+
     return (
         <>
             <Navbar />
@@ -181,6 +186,7 @@ const Fornecedor = () => {
                         <tr>
                             <th>Nome</th>
                             <th>Contato</th>
+                            <th className='acoes'>Detalhes</th>
                             <th>Status</th>
                             <th className='acoes'>Ações</th>
                         </tr>
@@ -190,6 +196,16 @@ const Fornecedor = () => {
                             <tr key={fornecedor.id}>
                                 <td>{fornecedor.nome}</td>
                                 <td>{fornecedor.email}</td>
+                                <td>
+                                    <FiFileText
+                                        color='#6098DE'
+                                        className='icon'
+                                        size={20}
+                                        type='button'
+                                        title="Detalhes"
+                                        onClick={() => DetalheFornecedor(fornecedor.id)}
+                                    />
+                                </td>
                                 <td>{fornecedor.enabled ? "ATIVO" : "DESATIVADO"}</td>
                                 <td>
                                     <FiEdit3

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useAuth from "../../hooks/useAuth";
 import Navbar from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
-import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3 } from 'react-icons/fi'
+import { FiXCircle, FiCheckCircle, FiPlusCircle, FiEdit3, FiFileText } from 'react-icons/fi'
 
 import api from '../../api/api'
 
@@ -109,6 +109,10 @@ const Clientes = () => {
         navigate(`/clientes/editar/${id}`)
     }
 
+    async function DetalheCliente(id) {
+        navigate(`/clientes/detalhe/${id}`)
+    }
+
     async function desativar(id) {
         const data = clientes.find(u => u.id === id)
         data.enabled = false;
@@ -182,6 +186,7 @@ const Clientes = () => {
                             <th>Nome</th>
                             <th>E-Mail</th>
                             <th>Telefone</th>
+                            <th className='acoes'>Detalhes</th>
                             <th>Status</th>
                             <th className='acoes'>Ações</th>
                         </tr>
@@ -192,6 +197,19 @@ const Clientes = () => {
                                 <td>{user.nome}</td>
                                 <td>{user.email}</td>
                                 <td>{user.telefone}</td>
+                                <td>
+                                <td>
+                                    <FiFileText
+                                        color='#6098DE'
+                                        className='icon'
+                                        size={20}
+                                        type='button'
+                                        title="Detalhes"
+                                        onClick={() => DetalheCliente(user.id)}
+                                    />
+                                </td>
+
+                                </td>
                                 <td>{user.enabled ? "ATIVO" : "DESATIVADO"}</td>
                                 <td>
                                     <FiEdit3

@@ -48,7 +48,6 @@ const NovoCliente = () => {
 
         let controle = validacoes();
         if(controle !== 0){
-           console.log("chegou aqui")
             return;
         }
 

@@ -30,10 +30,12 @@ import EditarMarca from "../pages/Marcas/EditarMarca";
 import Fornecedores from "../pages/Fornecedores";
 import NovoFornecedor from "../pages/Fornecedores/NovoFornecedor";
 import EditarFornecedor from "../pages/Fornecedores/EditarFornecedor";
+import DetalheFornecedor from "../pages/Fornecedores/DetalheFornecedores";
 
 import Clientes from "../pages/Clientes";
 import NovoCliente from "../pages/Clientes/NovoCliente";
 import EditarCliente from "../pages/Clientes/EditarCliente";
+import DetalheCliente from "../pages/Clientes/DetalheCliente";
 
 
 const Private = ({ Item }) => {
@@ -78,10 +80,12 @@ const RoutesApp = () => {
                     <Route path="/fornecedores" element={<Private Item={Fornecedores} />} />
                     <Route path="/fornecedores/novos" element={<Private Item={NovoFornecedor} />} />
                     <Route path="/fornecedores/editar/:id" element={<Private Item={EditarFornecedor} />} />
+                    <Route path="/fornecedores/detalhe/:id" element={<Private Item={DetalheFornecedor} />} />
 
                     <Route path="/clientes" element={<Private Item={Clientes} />} />
                     <Route path="/clientes/novo" element={<Private Item={NovoCliente} />} />
                     <Route path="/clientes/editar/:id" element={<Private Item={EditarCliente} />} />
+                    <Route path="/clientes/detalhe/:id" element={<Private Item={DetalheCliente} />} />
 
                 </Routes>
             </Fragment>

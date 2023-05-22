@@ -40,7 +40,14 @@ const Navbar = () => {
     const clientes = () => {
         navigate("/clientes")
     }
+
+    const insumos = () => {
+        navigate("/insumos")
+    }
     
+    const inventario = () => {
+        navigate("/inventario")
+    }
 
 
 
@@ -87,9 +94,7 @@ const Navbar = () => {
                
 
                 <ul className="drop-down">
-                    <li className='drop-down-label'> <Link className='link' to="/insumos">
-                    Insumos
-                </Link>
+                    <li className='drop-down-label'> Gestão de Insumos
                         <ul>
                             <li onClick={marcas}>
                                 <Link className='drop-down-link'>
@@ -102,9 +107,21 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
+                            <li onClick={insumos}>
+                                <Link className='drop-down-link'>
+                                    Insumos
+                                </Link>
+                            </li>
+
+                            <li onClick={inventario}>
+                                <Link className='drop-down-link'>
+                                Inventário
+                                </Link>
+                            </li>
+
                             <li onClick={insumo}>
                                 <Link className='drop-down-link'>
-                                    Manutenção de insumos
+                                Gestão de compras
                                 </Link>
                             </li>
                            
