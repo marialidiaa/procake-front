@@ -3,7 +3,6 @@ import Navbar from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { FiFilePlus, FiFileMinus, FiXSquare, FiRotateCcw, FiGrid} from 'react-icons/fi'
 
-import './styles.css'
 import '../../styles/Global.css'
 
 const ManutencaoInsumo = () => {

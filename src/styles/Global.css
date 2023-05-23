@@ -376,3 +376,55 @@ form textarea {
     width: 600px;
     margin-top: 40px;
 }
+.top-filter {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 5vw;
+}
+
+.top-filter h3 {
+    line-height: 70px;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.top-filter div.input {
+    margin-left: 20px;
+    width: 25%;
+}
+
+.top-filter div.input input {
+    max-width: 90%;
+    min-width: 90%;
+    height: 40px;
+    color: #333333;
+    border: 1px solid #DCDCE6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-top: 10px;
+}
+
+
+.top-filter div.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 20px 0 0px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.top-filter div.btn:hover {
+    filter: brightness(60%);
+}
+
+.container-pesquisa {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

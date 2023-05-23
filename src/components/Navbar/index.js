@@ -49,6 +49,10 @@ const Navbar = () => {
         navigate("/inventario")
     }
 
+    const gestaoCompras = () => {
+        navigate("/gestao-compras")
+    }
+
 
 
     return (
@@ -119,7 +123,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
-                            <li onClick={insumo}>
+                            <li onClick={gestaoCompras}>
                                 <Link className='drop-down-link'>
                                 Gestão de compras
                                 </Link>

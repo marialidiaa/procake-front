@@ -9,7 +9,7 @@ import UTILS from '../../utils/UTILS'
 import './styles.css'
 import '../../styles/Global.css'
 
-const EntradaInsumo = () => {
+const NovaCompra = () => {
 
     const [insumo, setInsumo] = useState("")
     const [listaInsumo, setListaInsumo] = useState([])
@@ -93,92 +93,85 @@ const EntradaInsumo = () => {
     return (
         <>
             <Navbar />
-            <section className='form'>
-                <h1>Inserir insumo</h1>
-                <form>
-
-                    <div className='input'>
-                        <label>Pesquisa do insumo</label>
-                        <input
-                            placeholder='Pesquisar por nome de insumo'
-                            value={pesquisa}
-                            onChange={e => setPesquisa(e.target.value)}
-                        />
-                    </div>
-
-                    <div className='input'>
-                        <label>Insumo</label>
-                        <select
-                            onChange={(e) => setInsumo(e.target.value)}
-                            value={insumo}
-                        >
-                            <option>Selecionar</option>
-                            {listaInsumo.map(ins => (
-                                <option key={ins.id} value={ins.id} >COD: {ins.codigo} - {ins.nome} - {ins.unidadeMedida} </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className='input'>
-                        <label>Quantidade</label>
-                        <input
-                            type='text'
-                            placeholder='Quantidade'
-                            onChange={(e) => handleChange(e, setQuantidade)}
-                            value={quantidade}
-                        />
-                    </div>
-                    <div className='input'>
-                        <label>Valor Pago</label>
-                        <input
-                            type='text'
-                            placeholder='Valor Pago'
-                            onChange={(e) => handleChange(e, setValor)}
-                            value={valor}
-                        />
-                    </div>
-                    <div className='input'>
-                        <label>Data de vencimento</label>
-                        <input
-                            type='date'
-                            placeholder='Data de vencimento'
-                            onChange={(e) => setDataVencimento(e.target.value)}
-                            value={dataVencimento}
-                        />
-                    </div>
-
-                    <div className='input'>
-                        <label>Nota fiscal</label>
-                        <input
-                            type='text'
-                            placeholder='Nota fiscal'
-                            onChange={(e) => setNotaFiscal(e.target.value)}
-                            value={notaFiscal}
-                        />
-                    </div>
-
+            <section className='top-filter'>
+                <h3>Inserir Nova Compra</h3>
+                <h4>Filtros de pesquisa</h4>
+                <div className='container-pesquisa'>
                     <div className='input'>
                         <label>Marca</label>
                         <input
+                            placeholder='Pesquisar por marca'
+                            value={insumo}
+                            onChange={e => setInsumo(e.target.value)}
                             type='text'
-                            placeholder='Marca'
-                            onChange={(e) => setMarca(e.target.value)}
-                            value={marca}
+                        />
+                    </div>
+                    <div className='input'>
+                        <label>Fornecedor</label>
+                        <input
+                            placeholder='Pesquisar por fornecedor'
+                            value={insumo}
+                            onChange={e => setInsumo(e.target.value)}
+                            type='text'
+                        />
+                    </div>
+                    <div className='input'>
+                        <label>Insumo</label>
+                        <input
+                            placeholder='Pesquisar por nome de insumo'
+                            value={insumo}
+                            onChange={e => setInsumo(e.target.value)}
+                            type='text'
                         />
                     </div>
 
+                    
                     <div className='input'>
                         <button className='btn-save' onClick={e => salvar(e)}>
                             Salvar
                         </button>
+                        <Link to="/gestao-compras" className='btn-cancel' >
+                            Voltar
+                        </Link>
+                    </div>
+                </div>
+                <h4>Dados lançamento</h4>
+            </section>
 
-                        <Link to="/insumos/manutencao" className=' btn-cancel' >
+
+
+            <section className='form'>
+
+                <form>
+                    <div className='input'>
+                        <label>Nome</label>
+                        <input
+                            type='text'
+                            placeholder='Nome'
+                        />
+                    </div>
+
+                    <div className='input'>
+                        <label>Nome</label>
+                        <input
+                            type='text'
+                            placeholder='Nome'
+                        />
+                    </div>
+
+                    <div className='input'>
+                        <button className='btn-save' onClick={salvar} >
+                            Salvar
+                        </button>
+
+                        <Link to="/insumos" className=' btn-cancel' >
                             Voltar
                         </Link>
                     </div>
                 </form>
-            </section>
+            </section >
         </>
     )
 }
 
-export default EntradaInsumo
+export default NovaCompra

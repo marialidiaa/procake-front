@@ -13,15 +13,11 @@ import EditarUsuario from "../pages/Usuarios/EditarUsuario";
 import Insumos from "../pages/Insumos";
 import NovoInsumo from "../pages/Insumos/NovoInsumo";
 import EditarInsumo from "../pages/Insumos/EditarInsumo";
+import Lancamentos from "../pages/Insumos/Lancamentos";
+import DetalheLancamentoInsumo from "../pages/Insumos/DetalheLancamentoInsumo";
 
 import ManutencaoInsumo from '../pages/ManutencaoInsumo'
-import ManutencaoInsumoNovoEntradaInsumo from '../pages/ManutencaoInsumo/EntradaInsumo'
 import ManutencaoInsumoEstornoLancamentoInsumo from '../pages/ManutencaoInsumo/EstornoLancamentoInsumo'
-import ManutencaoInsumoEstornoBaixaInsumo from '../pages/ManutencaoInsumo/EstornoBaixaInsumo'
-import ManutencaoInsumoReintegracaoInsumo from '../pages/ManutencaoInsumo/ReintegracaoInsumo'
-import ManutencaoInsumoBaixaInsumo from '../pages/ManutencaoInsumo/BaixaInsumo'
-import Lancamentos from "../pages/ManutencaoInsumo/Lancamentos";
-import DetalheLancamentoInsumo from "../pages/ManutencaoInsumo/DetalheLancamentoInsumo";
 
 import Marcas from "../pages/Marcas";
 import NovaMarca from "../pages/Marcas/NovaMarca";
@@ -36,6 +32,9 @@ import Clientes from "../pages/Clientes";
 import NovoCliente from "../pages/Clientes/NovoCliente";
 import EditarCliente from "../pages/Clientes/EditarCliente";
 import DetalheCliente from "../pages/Clientes/DetalheCliente";
+
+import GestaoCompras from "../pages/GestaoCompras";
+import NovaCompra from "../pages/GestaoCompras/NovaCompra";
 
 
 const Private = ({ Item }) => {
@@ -63,16 +62,13 @@ const RoutesApp = () => {
                     <Route path="/insumos" element={<Private Item={Insumos} />} />
                     <Route path="/insumos/novo" element={<Private Item={NovoInsumo} />} />
                     <Route path="/insumos/editar/:id" element={<Private Item={EditarInsumo} />} />
+                    <Route path="/insumos/lancamentos/:id" element={<Private Item={Lancamentos} />} />
+                     <Route path="/insumos/lancamentos/detalhes/:id" element={<Private Item={DetalheLancamentoInsumo} />} />
+
 
                     <Route path="/insumos/manutencao" element={<Private Item={ManutencaoInsumo} />} />
                     <Route path="/insumos/manutencao/estorno-lancamento" element={<Private Item={ManutencaoInsumoEstornoLancamentoInsumo} />} />
-                    <Route path="/insumos/manutencao/novo" element={<Private Item={ManutencaoInsumoNovoEntradaInsumo} />} />
-                    {/* <Route path="/insumo/manutencao/baixa" element={<Private Item={BaixaEstoque} />} />
-                    <Route path="/insumo/manutencao/reintegracao" element={<Private Item={ReintegracaoInsumo} />} />
-                    <Route path="/insumo/manutencao/estorno-baixa" element={<Private Item={EstornoBaixaInsumo} />} /> */}
-                     <Route path="/insumos/lancamentos/:id" element={<Private Item={Lancamentos} />} />
-                     <Route path="/insumos/lancamentos/detalhes/:id" element={<Private Item={DetalheLancamentoInsumo} />} />
-
+                     
                     <Route path="/marcas" element={<Private Item={Marcas} />} />
                     <Route path="/marcas/novas" element={<Private Item={NovaMarca} />} />
                     <Route path="/marcas/editar/:id" element={<Private Item={EditarMarca} />} />
@@ -86,6 +82,9 @@ const RoutesApp = () => {
                     <Route path="/clientes/novo" element={<Private Item={NovoCliente} />} />
                     <Route path="/clientes/editar/:id" element={<Private Item={EditarCliente} />} />
                     <Route path="/clientes/detalhe/:id" element={<Private Item={DetalheCliente} />} />
+
+                    <Route path="/gestao-compras" element={<Private Item={GestaoCompras} />}/>
+                    <Route path="/gestao-compras/novo" element={<Private Item={NovaCompra} />}/>
 
                 </Routes>
             </Fragment>

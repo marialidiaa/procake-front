@@ -1,4 +1,4 @@
-.manutencao-estoque-filter {
+/* .manutencao-estoque-filter {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -7,9 +7,9 @@
 
 .manutencao-estoque-filter div.input {
     display: flex;
-    width: 25vw;
     flex-direction: column;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .manutencao-estoque-filter div.btn {
@@ -54,4 +54,4 @@
 .menu-manutencao-estoque div.btn div {
     margin-bottom: 10px;
 
-}
+} */

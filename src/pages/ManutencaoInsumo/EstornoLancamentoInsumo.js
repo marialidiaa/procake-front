@@ -4,7 +4,7 @@ import { FiSearch, FiTrash2 } from 'react-icons/fi'
 
 import api from '../../api/api'
 
-import './styles.css'
+
 import '../../styles/Global.css'
 
 const EstornoLancamentoInsumo = () => {

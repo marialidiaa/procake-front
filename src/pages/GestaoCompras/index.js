@@ -1,93 +1,29 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
-import { FiSearch, FiTrash2 } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
+import { FiSearch, FiTrash2, FiPlusCircle } from 'react-icons/fi'
 
 import api from '../../api/api'
 
 import './styles.css'
 import '../../styles/Global.css'
 
-const EstornoLancamentoInsumo = () => {
+const GestaoCompras = () => {
 
     const [estoque, setEstoque] = useState([])
     const [dataInicial, setDataInicial] = useState("")
     const [dataFinal, setDataFinal] = useState("")
     const [usuarioInsercao, setUsuarioInsercao] = useState("")
-    const [insumo, setInsumo] = useState("")
+    const [notaFiscal, setNotaFiscal] = useState("")
 
     const tokenAcesso = localStorage.getItem('tokenAcesso')
+    const navigate = useNavigate()
 
 
-    async function pesquisar() {
 
-        const data = {
-            dataInicial,
-            dataFinal,
-            usuarioInsercao,
-            insumo
-        }
-
-        try {
-            let res = await api.post(`estoque/pesquisar`, data, {
-                headers: {
-                    Authorization: `Bearer ${tokenAcesso}`
-                }
-            })
-
-            res.data.forEach(e => {
-                let data = new Date(e.dataVencimento);
-                let dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-
-                e.dataVencimento = dataFormatada;
-
-                e.valor = e.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-            })
-
-            setEstoque(res.data)
-
-            setDataFinal("")
-            setDataInicial("")
-            setInsumo("")
-            setUsuarioInsercao("")
-
-            return
-        } catch (error) {
-
-            setDataFinal("")
-            setDataInicial("")
-            setInsumo("")
-            setUsuarioInsercao("")
-            alert(error.response.data.message)
-            return
-        }
+    async function novaCompra() {
+        navigate(`/gestao-compras/novo`)
     }
-
-
-    async function estorno(id) {
-
-        let estoqueJson = estoque.find(item => item.id === id);
-
-
-        const data = {
-            "id": estoqueJson.id,
-        }
-
-        try {
-            console.log(data)
-            await api.post(`estoque/estorno`, data, {
-                headers: {
-                    Authorization: `Bearer ${tokenAcesso}`
-                }
-            })
-            
-            setEstoque(estoque.filter(item => item.id !== id));
-            return
-        } catch (error) {
-            alert(error.response.data.message)
-            return
-        }
-    }
-
 
 
 
@@ -95,9 +31,9 @@ const EstornoLancamentoInsumo = () => {
         <>
             <Navbar />
             <section className='top-filter'>
-                <h3>Manutenção de insumos - Estorno do Lançamento</h3>
+                <h3>Gestão compras</h3>
                 <h4>Filtros de pesquisa</h4>
-                <div className='manutencao-estoque-filter'>
+                <div className='container-pesquisa'>
 
                     <div className='input'>
                         <label>Data de inicial</label>
@@ -117,7 +53,7 @@ const EstornoLancamentoInsumo = () => {
                         />
                     </div>
                     <div className='input'>
-                        <label>Usuario responsavel pela inserção</label>
+                        <label>Usuário responsável pela inserção</label>
                         <input
                             placeholder='Pesquisar por nome de usuario'
                             value={usuarioInsercao}
@@ -126,37 +62,38 @@ const EstornoLancamentoInsumo = () => {
                         />
                     </div>
                     <div className='input'>
-                        <label>Insumo</label>
+                        <label>Nota Fiscal</label>
                         <input
-                            placeholder='Pesquisar por nome de insumo'
-                            value={insumo}
-                            onChange={e => setInsumo(e.target.value)}
+                            placeholder='Pesquisar por nota fiscal'
+                            value={notaFiscal}
+                            onChange={e => setNotaFiscal(e.target.value)}
                             type='text'
                         />
                     </div>
-                    <div className='btn' onClick={pesquisar}>
-                        <button type='button'>
-                            <FiSearch size={25} color='#6098DE' />
-                        </button>
+                    <div className='btn'>
+                        <FiSearch size={25} color='#6098DE' />
                         <p>Pesquisar</p>
                     </div>
+
+                    <div className='btn' onClick={novaCompra}>
+                    <FiPlusCircle size={25} color='#51AD86' />
+                    <p>Adicionar</p>
+                </div>
+
                 </div>
             </section>
 
             <section className='table-small'>
                 <table>
                     <thead>
-                        <tr>
-                            <th>Insumo</th>
-                            <th className='acoes'>Marca</th>
-                            <th>Quantidade</th>
-                            <th>Data de vencimento</th>
-                            <th>Valor pago</th>
+                        <tr>    
                             <th>Nota fiscal</th>
+                            <th>Usuário</th>
+                            <th>Data de inserção</th>
                             <th className='acoes'>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         {estoque.map(estoque => (
                             <tr key={estoque.id}>
                                 <td>{estoque.insumo.nome}</td>
@@ -179,7 +116,7 @@ const EstornoLancamentoInsumo = () => {
                                 </td>
                             </tr>
                         ))}
-                    </tbody>
+                    </tbody> */}
                 </table>
             </section>
 
@@ -187,4 +124,4 @@ const EstornoLancamentoInsumo = () => {
     )
 }
 
-export default EstornoLancamentoInsumo
+export default GestaoCompras
