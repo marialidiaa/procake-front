@@ -38,14 +38,14 @@ const NovoFornecedor = () => {
 
     useEffect(() => {
         setErroNome("")
-        setEmail("")
+        setErroEmail("")
         setErroTelefone("")
-        setCidade("")
-        setEstado("")
-        setCpfCnpj("")
-        setBairro("")
-        setCep("")
-        setRua("")
+        setErroCidade("")
+        setErroEstado("")
+        setErrocpfCnpj("")
+        setErroBairro("")
+        setErroCep("")
+        setErroRua("")
 
      }, [])
 
@@ -201,7 +201,7 @@ const NovoFornecedor = () => {
                             placeholder='Bairro'
                             onChange={(e) => setBairro (e.target.value)}
                         />
-                        <p className='textErro'>{erroTelefone}</p>
+                        <p className='textErro'>{erroBairro}</p>
                     </div> 
 
                     <div className='input'>

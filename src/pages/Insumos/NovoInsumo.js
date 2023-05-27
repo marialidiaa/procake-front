@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../../api/api'
@@ -13,13 +13,28 @@ const NovoInsumo = () => {
     const [unidadeMedida, setUnidadeMedida] = useState("")
     const [descricao, setDescricao] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+    const [erroUnidadeMedida, setErroUnidadeMedida] = useState("")
+    const [erroDescricao, setErroDescricao] = useState("")
+
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setErroNome("")
+        setErroUnidadeMedida("")
+        setErroDescricao("")
+    }, [])
 
 
     async function salvar(e) {
 
         e.preventDefault()
+
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
 
         const data = {
             nome,
@@ -47,6 +62,23 @@ const NovoInsumo = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(unidadeMedida.trim().length <= 0 || unidadeMedida.trim === "" || unidadeMedida == null){
+            setErroUnidadeMedida("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(descricao.trim().length <= 0 || descricao.trim === "" || descricao == null){
+            setErroDescricao("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -62,6 +94,7 @@ const NovoInsumo = () => {
                             onChange={(e) => setNome(e.target.value)}
                             value={nome}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>
@@ -79,6 +112,7 @@ const NovoInsumo = () => {
                             <option value="L">LITRO (L)</option>
                             <option value="UN">UNIDADE (UN)</option>
                         </select>
+                        <p className='textErro'>{erroUnidadeMedida}</p>
                     </div>
 
                     <div className='text-area'>
@@ -89,6 +123,7 @@ const NovoInsumo = () => {
                             onChange={(e) => setDescricao(e.target.value)}
                             value={descricao}
                         />
+                        <p className='textErro'>{erroDescricao}</p>
                     </div>
 
                     <div className='input'>

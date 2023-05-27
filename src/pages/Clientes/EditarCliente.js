@@ -24,10 +24,30 @@ const EditarCliente = () => {
     const [cpfCnpj, setCpfCnpj] = useState("")
     const [enabled, setEnabled] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+    const [erroEmail, setErroEmail] = useState("")
+    const [erroTelefone, setErroTelefone] = useState("")
+    const [erroCidade, setErroCidade] = useState("")
+    const [erroEstado, setErroEstado] = useState("")
+    const [erroRua, setErroRua] = useState("")
+    const [erroBairro, setErroBairro] = useState("")
+    const [erroCep, setErroCep] = useState("")
+
 
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
     const { id } = useParams();
+
+    useEffect(() => {
+        setErroNome("")
+        setErroEmail("")
+        setErroTelefone("")
+        setErroCidade("")
+        setErroEstado("")
+        setErroBairro("")
+        setErroCep("")
+        setErroRua("")
+    }, [])
 
 
     useEffect(() => {
@@ -56,6 +76,11 @@ const EditarCliente = () => {
 
         e.preventDefault()
 
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
+
         const data = {
             nome,
                 email,
@@ -83,6 +108,43 @@ const EditarCliente = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(email.trim().length <= 0 || email.trim === "" || email == null){
+            setErroEmail("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cidade.trim().length <= 0 || cidade.trim === "" || cidade == null){
+            setErroCidade("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(estado.trim().length <= 0 || estado.trim === "" || estado == null){
+        setErroEstado("*Não pode ser vazio*")
+        controle = 1;            
+        }        
+        if(telefone.trim().length <= 0 || telefone.trim === "" || telefone == null){
+            setErroTelefone("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(rua.trim().length <= 0 || rua.trim === "" || rua == null){
+            setErroRua("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(bairro.trim().length <= 0 || bairro.trim === "" || bairro == null){
+            setErroBairro("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cep.trim().length <= 0 || cep.trim === "" || cep == null){
+            setErroCep("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -98,6 +160,7 @@ const EditarCliente = () => {
                             onChange={(e) => setNome(e.target.value)}
                             value={nome}
                     />
+                    <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>
@@ -108,6 +171,7 @@ const EditarCliente = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                         />
+                        <p className='textErro'>{erroEmail}</p>
                     </div> 
 
                     <div className='input'>
@@ -129,6 +193,7 @@ const EditarCliente = () => {
                             onChange={(e) => setTelefone(e.target.value)}
                             value={telefone}
                         />
+                        <p className='textErro'>{erroTelefone}</p>
                     </div>
 
                     <div className='input'>
@@ -139,6 +204,7 @@ const EditarCliente = () => {
                             onChange={(e) => setRua (e.target.value)}
                             value={rua}
                         />
+                        <p className='textErro'>{erroRua}</p>
                     </div>
 
                     <div className='input'>
@@ -159,6 +225,7 @@ const EditarCliente = () => {
                             onChange={(e) => setBairro (e.target.value)}
                             value={bairro}
                         />
+                        <p className='textErro'>{erroBairro}</p>
                     </div> 
 
                     <div className='input'>
@@ -169,6 +236,7 @@ const EditarCliente = () => {
                             onChange={(e) => setCep (e.target.value)}
                             value={cep}
                         />
+                        <p className='textErro'>{erroCep}</p>
                     </div>  
 
                     <div className='input'>
@@ -189,6 +257,7 @@ const EditarCliente = () => {
                             onChange={(e) => setCidade (e.target.value)}
                             value={cidade}
                         />
+                        <p className='textErro'>{erroCidade}</p>
                     </div> 
 
                     <div className='input'>
@@ -199,6 +268,7 @@ const EditarCliente = () => {
                             onChange={(e) => setEstado (e.target.value)}
                             value={estado}
                         />
+                        <p className='textErro'>{erroEstado}</p>
                     </div> 
 
 

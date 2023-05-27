@@ -13,12 +13,23 @@ const NovaMarca = () => {
 
     const [nome, setNome] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setErroNome("")
+    }, [])
 
     async function salvar(e) {
 
         e.preventDefault()
+
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
 
         const data = {
                 nome
@@ -39,6 +50,15 @@ const NovaMarca = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -53,6 +73,7 @@ const NovaMarca = () => {
                             placeholder='Nome'
                             onChange={(e) => setNome(e.target.value)}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>

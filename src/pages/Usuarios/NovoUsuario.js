@@ -18,8 +18,23 @@ const NovoUsuario = () => {
     const [cpfCnpj, setCpfCnpj] = useState("")
     const [grupoAcessoId, setGrupoAcessoId] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+    const [erroEmail, setErroEmail] = useState("")
+    const [erroTelefone, setErroTelefone] = useState("")
+    const [errocpfCnpj, setErrocpfCnpj] = useState("")
+    const [erroGrupoAcessoId, setErroGrupoAcessoId] = useState("")
+   
+
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setErroNome("")
+        setErroEmail("")
+        setErroTelefone("")
+        setErrocpfCnpj("")
+        setErroGrupoAcessoId("")
+    }, [])
 
 
     useEffect(() => {
@@ -40,6 +55,11 @@ const NovoUsuario = () => {
     async function salvar(e) {
 
         e.preventDefault()
+
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
         
         const data = {
                 nome,
@@ -69,6 +89,31 @@ const NovoUsuario = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(email.trim().length <= 0 || email.trim === "" || email == null){
+            setErroEmail("*Não pode ser vazio*")
+            controle = 1;
+        }     
+        if(telefone.trim().length <= 0 || telefone.trim === "" || telefone == null){
+            setErroTelefone("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cpfCnpj.trim().length <= 0 || cpfCnpj.trim === "" || cpfCnpj == null){
+            setErrocpfCnpj("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(grupoAcessoId.trim().length <= 0 || grupoAcessoId.trim === "" || grupoAcessoId == null){
+            setErroGrupoAcessoId("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -83,6 +128,7 @@ const NovoUsuario = () => {
                             placeholder='Nome'
                             onChange={(e) => setNome(e.target.value)}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
                     <div className='input'>
                         <label>Email</label>
@@ -91,6 +137,7 @@ const NovoUsuario = () => {
                             placeholder='Email'
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        <p className='textErro'>{erroEmail}</p>
                     </div>
 
                     <div className='input'>
@@ -100,6 +147,7 @@ const NovoUsuario = () => {
                             placeholder='Telefone'
                             onChange={(e) => setTelefone(e.target.value)}
                         />
+                        <p className='textErro'>{erroTelefone}</p>
                     </div>
 
                     <div className='input'>
@@ -109,6 +157,7 @@ const NovoUsuario = () => {
                             placeholder='CPF'
                             onChange={(e) => setCpfCnpj(e.target.value)}
                         />
+                        <p className='textErro'>{errocpfCnpj}</p>
                     </div>
 
                     <div className='input'>
@@ -123,6 +172,7 @@ const NovoUsuario = () => {
                                 <option key={grupo.id} value={grupo.id}  >{grupo.nome}</option>
                             ))}
                         </select>
+                        <p className='textErro'>{erroGrupoAcessoId}</p>
                     </div>
 
                     <div className='input'>

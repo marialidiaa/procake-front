@@ -25,11 +25,14 @@ const DetalheLancamentoInsumo = () => {
 
     useEffect(() => {
 
-        api.get(`estoque/${id}`, {
+        api.get(`lancamentos/${id}`, {
             headers: {
                 Authorization: `Bearer ${tokenAcesso}`
             }
         }).then(response => {
+
+            console.log(response.data)
+
             setInsumo(response.data.insumo)
             setQuantidade(response.data.quantidade)
             let data = new Date(response.data.dataInsercao);
@@ -38,8 +41,8 @@ const DetalheLancamentoInsumo = () => {
             data = new Date(response.data.dataVencimento);
             dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
             setDataVencimento(dataFormatada)
-            setValor(response.data.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))
-            setNotaFiscal(response.data.notaFiscal)
+            setValor(response.data.valorPago.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }))
+            setNotaFiscal(response.data.notaFiscal.notaFiscal)
             setUsuarioInsercao(response.data.usuarioInsercao)
             setMarca(response.data.marca)
         })
@@ -85,7 +88,7 @@ const DetalheLancamentoInsumo = () => {
 
                     <div>
                         <h2>Usuario que inseriu: </h2>
-                        <p>{usuarioInsercao}</p>
+                        <p>{usuarioInsercao.nome}</p>
                     </div>
                     <div>
                         <h2>Nota Fiscal: </h2>
@@ -93,7 +96,7 @@ const DetalheLancamentoInsumo = () => {
                     </div>
                     <div>
                         <h2>Marca: </h2>
-                        <p>{marca}</p>
+                        <p>{marca.nome}</p>
                     </div>
                 </section>
             </section>

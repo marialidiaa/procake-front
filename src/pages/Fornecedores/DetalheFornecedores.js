@@ -11,6 +11,7 @@ const DetalheFornecedor = () => {
 
     const [fornecedor, setFornecedor] = useState("")
     
+    
 
 
     const tokenAcesso = localStorage.getItem('tokenAcesso')

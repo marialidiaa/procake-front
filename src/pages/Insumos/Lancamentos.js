@@ -37,7 +37,7 @@ const Lancamentos = () => {
             }
         })
 
-        api.get(`/estoque/listar-insumo-id/${id}`, {
+        api.get(`/insumos/lancamentos/${id}`, {
             headers: {
                 Authorization: `Bearer ${tokenAcesso}`
             },
@@ -47,6 +47,7 @@ const Lancamentos = () => {
                 page: 0
             }
         }).then((res) => {
+            console.log(res.data)
             res.data.forEach(e => {
                 let data = new Date(e.dataInsercao);
                 let dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
@@ -55,15 +56,13 @@ const Lancamentos = () => {
                 dataFormatada = data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
                 e.dataVencimento = dataFormatada;
 
-                e.valor = e.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                e.valorPago = e.valorPago.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             })
             setLancamento(res.data)
         }).catch((err) => {
-            if (err.response.data === "") {
-                signout();
-            } else {
-                alert(err.response.data)
-            }
+           
+                alert(err.response)
+            
         })
 
         
@@ -90,9 +89,9 @@ const Lancamentos = () => {
                             <th>Insumo</th>
                             <th className='acoes'>Marca</th>
                             <th>Quantidade</th>
-                            <th>Data de vencimento</th>
-                            <th>Valor pago</th>
-                            <th>Nota fiscal</th>
+                            <th className='acoes'>Data de vencimento</th>
+                            <th className='acoes'>Nota Fiscal</th>
+                            <th className='acoes'>Valor pago</th>
                             <th className='acoes'>Ações</th>
                         </tr>
                     </thead>
@@ -100,13 +99,13 @@ const Lancamentos = () => {
                         {lancamento.map(estoque => (
                             <tr key={estoque.id}>
                                 <td>COD: {insumo.codigo} - {insumo.nome}</td>
-                                <td>{estoque.marca}</td>
+                                <td>{estoque.marca.nome}</td>
                                 <td>
                                     {estoque.quantidade}{insumo.unidadeMedida}
                                 </td>
                                 <td>{estoque.dataVencimento}</td>
-                                <td>{estoque.valor}</td>
-                                <td>{estoque.notaFiscal ? (estoque.notaFiscal) : ("N/A")}</td>
+                                <td>{estoque.notaFiscal.notaFiscal}</td>
+                                <td>{estoque.valorPago}</td>
                                 <td>
                                     <FiFileText
                                         color='#6098DE'

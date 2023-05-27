@@ -29,18 +29,25 @@ const NovoCliente = () => {
     const [erroCidade, setErroCidade] = useState("")
     const [erroEstado, setErroEstado] = useState("")
     const [errocpfCnpj, setErrocpfCnpj] = useState("")
+    const [erroRua, setErroRua] = useState("")
+    const [erroBairro, setErroBairro] = useState("")
+    const [erroCep, setErroCep] = useState("")
+
 
 
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
 
     useEffect(() => {
-       setErroNome("")
-       setEmail("")
-       setErroTelefone("")
-       setCidade("")
-       setEstado("")
-       setCpfCnpj("")
+        setErroNome("")
+        setErroEmail("")
+        setErroTelefone("")
+        setErroCidade("")
+        setErroEstado("")
+        setErrocpfCnpj("")
+        setErroBairro("")
+        setErroCep("")
+        setErroRua("")
     }, [])
 
     async function salvar(e) {
@@ -107,6 +114,18 @@ const NovoCliente = () => {
             setErrocpfCnpj("*Não pode ser vazio*")
             controle = 1;
         }
+        if(rua.trim().length <= 0 || rua.trim === "" || rua == null){
+            setErroRua("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(bairro.trim().length <= 0 || bairro.trim === "" || bairro == null){
+            setErroBairro("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(cep.trim().length <= 0 || cep.trim === "" || cep == null){
+            setErroCep("*Não pode ser vazio*")
+            controle = 1;
+        }
         return controle
     }
 
@@ -163,6 +182,7 @@ const NovoCliente = () => {
                             placeholder='Rua'
                             onChange={(e) => setRua (e.target.value)}
                         />
+                        <p className='textErro'>{erroRua}</p>
                     </div>
 
                     <div className='input'>
@@ -181,6 +201,7 @@ const NovoCliente = () => {
                             placeholder='Bairro'
                             onChange={(e) => setBairro (e.target.value)}
                         />
+                        <p className='textErro'>{erroBairro}</p>
                     </div> 
 
                     <div className='input'>
@@ -190,6 +211,7 @@ const NovoCliente = () => {
                             placeholder='CEP'
                             onChange={(e) => setCep (e.target.value)}
                         />
+                        <p className='textErro'>{erroCep}</p>
                     </div>  
 
                     <div className='input'>

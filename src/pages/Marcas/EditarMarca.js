@@ -12,9 +12,15 @@ const EditarMarca = () => {
     const [nome, setNome] = useState("")
     const [enabled, setEnabled] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
     const { id } = useParams();
+
+    useEffect(() => {
+        setErroNome("")
+    }, [])
 
 
     useEffect(() => {
@@ -33,6 +39,11 @@ const EditarMarca = () => {
 
         e.preventDefault()
 
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
+
         const data = {
             nome,
             enabled
@@ -50,6 +61,15 @@ const EditarMarca = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -65,6 +85,7 @@ const EditarMarca = () => {
                             onChange={(e) => setNome(e.target.value)}
                             value={nome}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>

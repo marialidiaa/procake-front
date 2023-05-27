@@ -14,9 +14,19 @@ const EditarInsumo = () => {
     const [enabled, setEnabled] = useState("")
     const [descricao, setDescricao] = useState("")
 
+    const [erroNome, setErroNome] = useState("")
+    const [erroUnidadeMedida, setErroUnidadeMedida] = useState("")
+    const [erroDescricao, setErroDescricao] = useState("")
+
     const tokenAcesso = localStorage.getItem('tokenAcesso')
     const navigate = useNavigate();
     const { id } = useParams();
+
+    useEffect(() => {
+        setErroNome("")
+        setErroUnidadeMedida("")
+        setErroDescricao("")
+    }, [])
 
 
     useEffect(() => {
@@ -39,6 +49,11 @@ const EditarInsumo = () => {
 
         e.preventDefault()
 
+        let controle = validacoes();
+        if(controle !== 0){
+            return;
+        }
+
         const data = {
             nome,
             unidadeMedida,
@@ -59,6 +74,23 @@ const EditarInsumo = () => {
         }
     }
 
+    const validacoes =() =>{
+        let controle = 0
+        if(nome.trim().length <= 0 || nome.trim === "" || nome == null){
+            setErroNome("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(unidadeMedida.trim().length <= 0 || unidadeMedida.trim === "" || unidadeMedida == null){
+            setErroUnidadeMedida("*Não pode ser vazio*")
+            controle = 1;
+        }
+        if(descricao.trim().length <= 0 || descricao.trim === "" || descricao == null){
+            setErroDescricao("*Não pode ser vazio*")
+            controle = 1;
+        }
+        return controle
+    }
+
 
     return (
         <>
@@ -74,6 +106,7 @@ const EditarInsumo = () => {
                             onChange={(e) => setNome(e.target.value)}
                             value={nome}
                         />
+                        <p className='textErro'>{erroNome}</p>
                     </div>
 
                     <div className='input'>
@@ -89,8 +122,8 @@ const EditarInsumo = () => {
                             <option value="ML">MILILITRO (ML)</option>
                             <option value="L">LITRO (L)</option>
                             <option value="UN">UNIDADE (UN)</option>
-
                         </select>
+                        <p className='textErro'>{erroUnidadeMedida}</p>
                     </div>
 
                     <div className='text-area'>
@@ -101,6 +134,7 @@ const EditarInsumo = () => {
                             onChange={(e) => setDescricao(e.target.value)}
                             value={descricao}
                         />
+                        <p className='textErro'>{erroDescricao}</p>
                     </div>
 
                     <div className='input'>

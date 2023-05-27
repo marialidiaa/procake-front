@@ -35,7 +35,7 @@ import DetalheCliente from "../pages/Clientes/DetalheCliente";
 
 import GestaoCompras from "../pages/GestaoCompras";
 import NovaCompra from "../pages/GestaoCompras/NovaCompra";
-
+import DetalheNota from "../pages/GestaoCompras/DetalheNota";
 
 const Private = ({ Item }) => {
     const { signed } = useAuth();
@@ -85,6 +85,7 @@ const RoutesApp = () => {
 
                     <Route path="/gestao-compras" element={<Private Item={GestaoCompras} />}/>
                     <Route path="/gestao-compras/novo" element={<Private Item={NovaCompra} />}/>
+                    <Route path="/gestao-compras/detalhe/:id" element={<Private Item={DetalheNota} />} />
 
                 </Routes>
             </Fragment>
